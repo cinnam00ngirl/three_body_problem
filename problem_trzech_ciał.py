@@ -19,11 +19,11 @@ v2_0 = np.array([1.0, 0.0, 0.1])
 v3_0 = np.array([0.1, 0.1, 0.0])
 
 
-
+#TO DO: NA SAM KONIEC UWAŻAĆ NA DZIELENIE PRZEZ 0!!!
 def rownanie_rozniczkowe(t,y,m1,m2,m3):
     r1 = y[0:3]
     r2 = y[3:6]
-    r3 = y[3:9]
+    r3 = y[6:9]
     v1 = y[9:12]
     v2 = y[12:15]
     v3 = y[15:18]
@@ -44,4 +44,4 @@ def rownanie_rozniczkowe(t,y,m1,m2,m3):
     x2_dt = v2
     x3_dt = v3
 
-    return np.array([x1_dt, x2_dt, x3_dt, x1_dtdt, x2_dtdt, x3_dtdt])
+    return np.concatenate([x1_dt, x2_dt, x3_dt, x1_dtdt, x2_dtdt, x3_dtdt]) #bo do solve_ivp potrzeba wektora
