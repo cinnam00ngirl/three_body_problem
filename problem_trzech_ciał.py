@@ -8,6 +8,10 @@ m1=1
 m2=2
 m3=3
 
+q1=1
+q2=1
+q3=1
+
 #pozycje początkowe - tu też możemy dać suwak
 r1_0 = np.array([1.0, 1.0, 1.0])
 r2_0 = np.array([0.0, 0.0, 0.0])
@@ -20,7 +24,7 @@ v3_0 = np.array([0.1, 0.1, 0.0])
 
 
 #TO DO: NA SAM KONIEC UWAŻAĆ NA DZIELENIE PRZEZ 0!!!
-def rownanie_rozniczkowe(t,y,m1,m2,m3):
+def rownanie_rozniczkowe(t,y,m1,m2,m3, q1, q2, q3):
     r1 = y[0:3]
     r2 = y[3:6]
     r3 = y[6:9]
@@ -36,9 +40,9 @@ def rownanie_rozniczkowe(t,y,m1,m2,m3):
     r13_dl = r31_dl
     r23_dl = r32_dl
 
-    x1_dtdt = m2*(r2-r1)/r21_dl**3 + m3*(r3-r1)/r31_dl**3
-    x2_dtdt = m1*(r1-r2)/r12_dl**3 + m3*(r3-r2)/r32_dl**3
-    x3_dtdt = m1*(r1-r3)/r13_dl**3 + m2*(r2-r3)/r23_dl**3
+    x1_dtdt = (m2+q2*q1/m1)*(r2-r1)/r21_dl**3 + (m3+q3*q1/m1)*(r3-r1)/r31_dl**3
+    x2_dtdt = (m1+q1*q2/m2)*(r1-r2)/r12_dl**3 + (m3+q3*q2/m2)*(r3-r2)/r32_dl**3
+    x3_dtdt = (m1+q1*q3/m3)*(r1-r3)/r13_dl**3 + (m2+q2*q3/m3)*(r2-r3)/r23_dl**3
 
     x1_dt = v1
     x2_dt = v2
@@ -53,7 +57,7 @@ rozwiazanie = solve_ivp(
     t_span = (0,10),
     y0 = warunki_poczatkowe,
     t_eval= np.linspace(0,10,2000),
-    args = (m1,m2,m3)
+    args = (m1,m2,m3, q1, q2, q3)
 )
 r1_x=rozwiazanie.y[0]
 r1_y=rozwiazanie.y[1]
