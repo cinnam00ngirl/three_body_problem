@@ -45,3 +45,14 @@ def rownanie_rozniczkowe(t,y,m1,m2,m3):
     x3_dt = v3
 
     return np.concatenate([x1_dt, x2_dt, x3_dt, x1_dtdt, x2_dtdt, x3_dtdt]) #bo do solve_ivp potrzeba wektora
+
+warunki_poczatkowe = np.concatenate([r1_0, r2_0, r3_0, v1_0, v2_0, v3_0])
+
+rozwiazanie = solve_ivp(
+    fun = rownanie_rozniczkowe,
+    t_span = (0,10),
+    y0 = warunki_poczatkowe,
+    t_eval= np.linspace(0,10,2000),
+    args = (m1,m2,m3)
+)
+
