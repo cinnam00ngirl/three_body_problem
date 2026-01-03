@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import time
 from scipy.integrate import solve_ivp
 
+
 #ustalamy masy początkowe - tu zrobimy suwak
 m1=1
 m2=2
@@ -55,4 +56,27 @@ rozwiazanie = solve_ivp(
     t_eval= np.linspace(0,10,2000),
     args = (m1,m2,m3)
 )
+r1_x=rozwiazanie.y[0]
+r1_y=rozwiazanie.y[1]
+r1_z=rozwiazanie.y[2]
+r2_x=rozwiazanie.y[3]
+r2_y=rozwiazanie.y[4]
+r2_z=rozwiazanie.y[5]
+r3_x=rozwiazanie.y[6]
+r3_y=rozwiazanie.y[7]
+r3_z=rozwiazanie.y[8]
+r1_vx=rozwiazanie.y[9]
+r1_vy=rozwiazanie.y[10]
+r1_vz=rozwiazanie.y[11]
+r2_vx=rozwiazanie.y[12]
+r2_vy=rozwiazanie.y[13]
+r2_vz=rozwiazanie.y[14]
+r3_vx=rozwiazanie.y[15]
+r3_vy=rozwiazanie.y[16]
+r3_vz=rozwiazanie.y[17]
+
+#print(r1_x)
+#print(rozwiazanie)
+
+
 
