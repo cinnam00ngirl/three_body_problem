@@ -86,9 +86,10 @@ r3_vz=rozwiazanie.y[17]
 okno = plt.figure()
 osie = okno.add_subplot(111, projection='3d')
 #CZARNE TŁO MOŻESZ SB ODKOMENTOWAĆ I ZOBACZYĆ
-# okno.patch.set_facecolor('black')
-# osie.set_facecolor('black')
-# osie.set_axis_off()
+okno.patch.set_facecolor('black')
+osie.set_facecolor('black')
+osie.set_axis_off()
+plt.legend()
 
 #Jak ustawić te osie, aby nie uciekały???
 osie.set_xlim(-5,5)
@@ -101,9 +102,10 @@ osie.set_zlabel('z')
 osie.set_title("Ruch trzech ciał")
 
 #punkty
-p1, = osie.plot([],[],[],'o',color="red",markersize=10)
-p2, = osie.plot([],[],[],'o',color="blue",markersize=10)
-p3, = osie.plot([],[],[],'o',color="green",markersize=10)
+p1, = osie.plot([],[],[],'o',color="red",markersize=10, label="Ciało 1")
+p2, = osie.plot([],[],[],'o',color="blue",markersize=10, label="Ciało 2")
+p3, = osie.plot([],[],[],'o',color="green",markersize=10, label="Ciało 3")
+osie.legend(loc="upper right")
 
 #widoczne trajektorie
 traj1, = osie.plot([],[],[], color="red", linewidth=1)
