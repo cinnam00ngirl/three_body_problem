@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.pyplot import xlabel
 from scipy.integrate import solve_ivp
 from matplotlib.animation import FuncAnimation
 
@@ -86,6 +85,7 @@ r3_vz=rozwiazanie.y[17]
 #RYSOWANIE ANIMACJI
 okno = plt.figure()
 osie = okno.add_subplot(111, projection='3d')
+#CZARNE TŁO MOŻESZ SB ODKOMENTOWAĆ I ZOBACZYĆ
 # okno.patch.set_facecolor('black')
 # osie.set_facecolor('black')
 # osie.set_axis_off()
@@ -101,8 +101,46 @@ osie.set_zlabel('z')
 osie.set_title("Ruch trzech ciał")
 
 #punkty
+p1, = osie.plot([],[],[],'o',color="red",markersize=10)
+p2, = osie.plot([],[],[],'o',color="blue",markersize=10)
+p3, = osie.plot([],[],[],'o',color="green",markersize=10)
+
+#widoczne trajektorie
+traj1, = osie.plot([],[],[], color="red", linewidth=1)
+traj2, = osie.plot([],[],[], color="blue", linewidth=1)
+traj3, = osie.plot([],[],[], color="green", linewidth=1)
+
+#apdejtowanie animacji!!!!
+
+def aktualizuj(ramka):
+    p1.set_data([r1_x[ramka]], [r1_y[ramka]])
+    p1.set_3d_properties([r1_z[ramka]])
+
+    p2.set_data([r2_x[ramka]], [r2_y[ramka]])
+    p2.set_3d_properties([r2_z[ramka]])
+
+    p3.set_data([r3_x[ramka]], [r3_y[ramka]])
+    p3.set_3d_properties([r3_z[ramka]])
+
+    traj1.set_data(r1_x[:ramka], r1_y[:ramka])
+    traj1.set_3d_properties(r1_z[:ramka])
+
+    traj2.set_data(r2_x[:ramka], r2_y[:ramka])
+    traj2.set_3d_properties(r2_z[:ramka])
+
+    traj3.set_data(r3_x[:ramka], r3_y[:ramka])
+    traj3.set_3d_properties(r3_z[:ramka])
+
+    return p1,p2,p3, traj1, traj2, traj3
 
 
+animacja = FuncAnimation(
+    fig=okno,
+    func=aktualizuj,
+    frames=len(rozwiazanie.t),
+    interval=1,  #żeby szybciej animacja chodziła jak chcesz
+    blit=True
+)
 plt.show()
 
 
