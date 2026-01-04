@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.pyplot import xlabel
 from scipy.integrate import solve_ivp
+from matplotlib.animation import FuncAnimation
 
 
 #ustalamy masy początkowe - tu zrobimy suwak
@@ -80,6 +82,28 @@ r3_vz=rozwiazanie.y[17]
 
 #print(r1_x)
 #print(rozwiazanie)
+
+#RYSOWANIE ANIMACJI
+okno = plt.figure()
+osie = okno.add_subplot(111, projection='3d')
+# okno.patch.set_facecolor('black')
+# osie.set_facecolor('black')
+# osie.set_axis_off()
+
+#Jak ustawić te osie, aby nie uciekały???
+osie.set_xlim(-5,5)
+osie.set_ylim(-5,5)
+osie.set_zlim(-5,5)
+
+osie.set_xlabel('x')
+osie.set_ylabel('y')
+osie.set_zlabel('z')
+osie.set_title("Ruch trzech ciał")
+
+#punkty
+
+
+plt.show()
 
 
 
