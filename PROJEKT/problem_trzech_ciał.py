@@ -93,9 +93,11 @@ def odpal_symulacje(m1, m2, m3, q1, q2, q3):
     okno = plt.figure()
     osie = okno.add_subplot(111, projection='3d')
     #CZARNE TŁO MOŻESZ SB ODKOMENTOWAĆ I ZOBACZYĆ
-    # okno.patch.set_facecolor('black')
-    # osie.set_facecolor('black')
-    # osie.set_axis_off()
+
+    def czarne_tlo():
+        okno.patch.set_facecolor('black')
+        osie.set_facecolor('black')
+        osie.set_axis_off()
 
 
     #Jak ustawić te osie, aby nie uciekały???
