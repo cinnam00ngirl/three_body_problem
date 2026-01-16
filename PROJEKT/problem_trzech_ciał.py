@@ -45,9 +45,9 @@ def odpal_symulacje(m1, m2, m3, q1, q2, q3):
         r13_dl = r31_dl
         r23_dl = r32_dl
 
-        x1_dtdt = (m2-q2*q1/m1)*(r2-r1)/r21_dl**3 + (m3-q3*q1/m1)*(r3-r1)/r31_dl**3
-        x2_dtdt = (m1-q1*q2/m2)*(r1-r2)/r12_dl**3 + (m3-q3*q2/m2)*(r3-r2)/r32_dl**3
-        x3_dtdt = (m1-q1*q3/m3)*(r1-r3)/r13_dl**3 + (m2-q2*q3/m3)*(r2-r3)/r23_dl**3
+        x1_dtdt = (m2+q2*q1/m1)*(r2-r1)/r21_dl**3 + (m3+q3*q1/m1)*(r3-r1)/r31_dl**3
+        x2_dtdt = (m1+q1*q2/m2)*(r1-r2)/r12_dl**3 + (m3+q3*q2/m2)*(r3-r2)/r32_dl**3
+        x3_dtdt = (m1+q1*q3/m3)*(r1-r3)/r13_dl**3 + (m2+q2*q3/m3)*(r2-r3)/r23_dl**3
 
         x1_dt = v1
         x2_dt = v2
