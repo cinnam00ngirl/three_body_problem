@@ -4,7 +4,7 @@ from scipy.integrate import solve_ivp
 from matplotlib.animation import FuncAnimation
 
 
-def odpal_symulacje(m1, m2, m3, q1, q2, q3):
+def odpal_symulacje(m1, m2, m3, q1, q2, q3, czarne_tlo=False):
 
     eps = 1e-5 #na wypadek zderzeń ciał zabezpieczenie
 
@@ -94,7 +94,7 @@ def odpal_symulacje(m1, m2, m3, q1, q2, q3):
     osie = okno.add_subplot(111, projection='3d')
     #CZARNE TŁO MOŻESZ SB ODKOMENTOWAĆ I ZOBACZYĆ
 
-    def czarne_tlo():
+    if czarne_tlo:
         okno.patch.set_facecolor('black')
         osie.set_facecolor('black')
         osie.set_axis_off()
@@ -155,7 +155,6 @@ def odpal_symulacje(m1, m2, m3, q1, q2, q3):
 
 
     plt.show()
-
 
 
 
