@@ -157,4 +157,3 @@ def odpal_symulacje(m1, m2, m3, q1, q2, q3):
 
 
 
-
