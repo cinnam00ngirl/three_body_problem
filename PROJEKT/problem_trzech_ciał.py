@@ -8,6 +8,9 @@ def odpal_symulacje(m1, m2, m3, q1, q2, q3):
 
     eps = 1e-5 #na wypadek zderzeń ciał zabezpieczenie
 
+    k=1.0
+    G=1.0
+
     #ustalamy masy początkowe - tu zrobimy suwak
     # m1=1
     # m2=2
@@ -38,16 +41,16 @@ def odpal_symulacje(m1, m2, m3, q1, q2, q3):
         v3 = y[15:18]
 
         #musimy obliczyć długość wektora
-        r21_dl = max(np.linalg.norm(r2-r1),eps)
-        r31_dl = max(np.linalg.norm(r3-r1),eps)
+        r21_dl = np.linalg.norm(r2-r1)+eps
+        r31_dl = np.linalg.norm(r3-r1)+eps
         r12_dl = r21_dl
-        r32_dl = max(np.linalg.norm(r3-r2),eps)
+        r32_dl = np.linalg.norm(r3-r2)+eps
         r13_dl = r31_dl
         r23_dl = r32_dl
 
-        x1_dtdt = (q3*q1/m1)*(r3-r1)/r31_dl**3 + m3*(r3-r1)/r31_dl**3 + (q1*q2/m1)*(r2-r1)/r21_dl**3 + m2*(r2-r1)/r21_dl**3
-        x2_dtdt = (q1*q2/m2)*(r1-r2)/r12_dl**3 + m1*(r1-r2)/r12_dl**3 + (q3*q2/m2)*(r3-r2)/r32_dl**3 + m3*(r3-r2)/r32_dl**3
-        x3_dtdt = (q1*q3/m3)*(r1-r3)/r13_dl**3 + m1*(r1-r3)/r13_dl**3 + (q2*q3/m3)*(r2-r3)/r23_dl**3 + m2*(r2-r3)/r23_dl**3
+        x1_dtdt = (k*q3*q1/m1)*(r3-r1)/r31_dl**3 + G*m3*(r3-r1)/r31_dl**3 + (k*q1*q2/m1)*(r2-r1)/r21_dl**3 + G*m2*(r2-r1)/r21_dl**3
+        x2_dtdt = (k*q1*q2/m2)*(r1-r2)/r12_dl**3 + G*m1*(r1-r2)/r12_dl**3 + (k*q3*q2/m2)*(r3-r2)/r32_dl**3 + G*m3*(r3-r2)/r32_dl**3
+        x3_dtdt = (k*q1*q3/m3)*(r1-r3)/r13_dl**3 + G*m1*(r1-r3)/r13_dl**3 + (k*q2*q3/m3)*(r2-r3)/r23_dl**3 + G*m2*(r2-r3)/r23_dl**3
 
         x1_dt = v1
         x2_dt = v2
@@ -61,7 +64,7 @@ def odpal_symulacje(m1, m2, m3, q1, q2, q3):
         fun = rownanie_rozniczkowe,
         t_span = (0,15),
         y0 = warunki_poczatkowe,
-        t_eval= np.linspace(0,15,2000),
+        t_eval= np.linspace(0,15,1000),
         args = (m1,m2,m3, q1, q2, q3)
     )
     r1_x=rozwiazanie.y[0]
@@ -144,7 +147,7 @@ def odpal_symulacje(m1, m2, m3, q1, q2, q3):
         fig=okno,
         func=aktualizuj,
         frames=len(rozwiazanie.t),
-        interval=0.01,  #żeby szybciej animacja chodziła jak chcesz
+        interval=6,  #żeby szybciej animacja chodziła jak chcesz
         blit=True
     )
 
